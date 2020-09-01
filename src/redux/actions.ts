@@ -1,8 +1,12 @@
 import {IAction, IPost} from "../types";
 
 // ACTION CREATOR
-export const ADD_COUNTER = 'ADD_COUNTER' // type
+export const ADD_COUNTER_TYPE = 'ADD_COUNTER' // type
+export const SET_TODOSLIST_TYPE = 'SET_TODOSLIST'
 
-export const addCounterTodoAction = (todo:IPost): IAction => {
-    return { type: ADD_COUNTER, payload: todo}
+export const addCounterTodoAction = (id: number): IAction => {
+    return { type: ADD_COUNTER_TYPE, payload: id}
+}
+export const setTodosListAction = (posts: Array<IPost>):IAction=>{
+    return {type: SET_TODOSLIST_TYPE, payload:posts}
 }
