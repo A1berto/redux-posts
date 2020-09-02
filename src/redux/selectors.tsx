@@ -1,4 +1,3 @@
-import {useSelector} from "react-redux";
 import {IRootSate} from "./reducers";
 import {createSelector} from 'reselect'
 import {IPost} from "../types";
@@ -9,6 +8,10 @@ const postEntitiesSelector = createSelector(
     rootSelector,
     ((rootState: IRootSate) => rootState.todosEntities)                 //questo mi ritorna {1:{},2:{}}
 )
+export const selectedButtonSelector = createSelector(
+    rootSelector,
+    ((selectedButton)=>selectedButton.selectedButton)
+)
 
 export const postKeysSelector = createSelector(
     rootSelector,
@@ -17,8 +20,17 @@ export const postKeysSelector = createSelector(
 
 export const postEntitiesValuesSelector = createSelector(
     postEntitiesSelector,
-    ((postEntitiesSelectorState: { [p: number]: IPost } | null) =>
-        postEntitiesSelectorState ? Object.values(postEntitiesSelectorState) : [])
+    ((postEntitiesSelectorState) => Object.values(postEntitiesSelectorState))
+)
+export const postEntitiesValuesByKeysSelector = createSelector(
+    postKeysSelector,
+    postEntitiesSelector,
+    (keys, entities): Array<IPost> => keys.map(key => entities[key])
+)//keys è il risultato del primo selector, posso chiamarlo come voglio
+
+export const selectedPostSelector = createSelector(
+    rootSelector,
+    ((rootState:IRootSate)=> rootState.selectedButton)
 )
 
 

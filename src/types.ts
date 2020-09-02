@@ -11,6 +11,7 @@ export interface IPost{
     submitterImg:string;
     leftImg: string;
     counter:number;
+    submitterName:string
     //subtitle:string | null;    !==  subtitle?:string;
 }
 
