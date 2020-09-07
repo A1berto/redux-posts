@@ -1,6 +1,8 @@
 import React from 'react'
 import {IPost} from "../types"
 import Arrow from "../../../redux-posts/src/images/arrow.png"
+import Circle from "../images/circle.png"
+import LeftImg from "../images/lefImg.png"
 
 interface PostProps {
     post: IPost
@@ -17,7 +19,7 @@ export const Post: React.FunctionComponent<PostProps> = (props) => {
             {/*NON POSSO STAMPARE UN OGGETTO
             {post}
             */}
-            <img className="imgLeft" src={post.leftImg} alt="ImageOfPost"/>
+            <img className="imgLeft" src={LeftImg} alt="ImageOfPost"/>
 
             <div className="centerSide">
                 <img className="arrow" src={Arrow} alt="arrowToUpdateCounter" onClick={handleClick} />
@@ -27,7 +29,7 @@ export const Post: React.FunctionComponent<PostProps> = (props) => {
                 <div className="title">{post.title}</div>
                 <div className="subtitle">{post.subtitle}</div>
                 <div className="submitted">Submitted by:
-                    <img className="sumbitterImg" src={post.submitterImg} alt="Immagine in caricamento"/></div>
+                    <img className="sumbitterImg" src={Circle} alt="Immagine in caricamento"/></div>
             </div>
         </li>
     )

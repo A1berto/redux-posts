@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@reactivex/rxjs": "^6.6.2",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -13,12 +14,16 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-redux": "^7.1.9",
     "@types/redux": "^3.6.0",
+    "groupama-fetch-core": "^0.0.14",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-observable": "^1.2.0",
     "reselect": "^4.0.0",
+    "rxjs": "^6.6.2",
     "typescript": "^3.7.5"
   },
   "scripts": {

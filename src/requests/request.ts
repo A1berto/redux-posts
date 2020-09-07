@@ -1,6 +1,16 @@
-const URL = "https://5f4e3b915b92f4001604d804.mockapi.io/"
+import {ajax, AjaxResponse} from "rxjs/ajax";
+import {catchError, mergeMap} from "rxjs/operators";
+import {Observable} from "rxjs";
 
-export const getToDoList = () => {
-    console.log("entrato nel get")
-    return fetch(URL).then(res => res.json())/*.then(json => json.body)*/
+const URL = " https://demo0465378.mockable.io"
+
+export const getToDoList$ = (
+    onSucc: (ajaxResponse: AjaxResponse) => any,
+    onErr: (err: any) => any,
+): Observable<any> => {
+    return ajax(URL).pipe(
+        mergeMap(onSucc),
+        catchError(onErr),
+    )
 }
+

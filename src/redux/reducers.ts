@@ -10,6 +10,15 @@ import {
 import {combineReducers} from 'redux'
 
 
+const selectedButtonReducer = (state: number = 0, action: IAction): number => {
+    switch (action.type) {
+        case CHANGE_SELECTED_BUTTON_TYPE:
+            return action.payload
+        default:
+            return state
+    }
+}
+
 const todosKeysReducer = (state: number[] = [], action: IAction): number[] => {
     switch (action.type) {
         case SET_TODOSLIST_TYPE:
@@ -26,16 +35,6 @@ const todosKeysReducer = (state: number[] = [], action: IAction): number[] => {
         case SORT_TODOS_LIST_BYSUBMITTER_TYPE:
             return [...action.payload].sort((todoA: IPost, todoB: IPost) => todoA.submitterName > todoB.submitterName ? 1 : -1).map((post: IPost) => post.id)
 
-        default:
-            return state
-    }
-}
-//TODO su questo reducer aggiungo un case che mi permette il sort delle chiavi in base a ... , dopo di che passo le keys ordinate al selector.
-// (FARE DIVERSI CASE, UNO PER OGNI SORT) QUINDI NEL COMPONENTE FACCIO DIVERSI DISPATCH QUANTI SONO I SORT.
-const selectedButtonReducer = (state: number = 0, action: IAction): number => {
-    switch (action.type) {
-        case CHANGE_SELECTED_BUTTON_TYPE:
-            return action.payload
         default:
             return state
     }
@@ -66,12 +65,12 @@ export interface IRootSate {
     selectedButton: number
     todosKeys: number[]
     todosEntities: { [key: number]: IPost }
-
 }
 
 const rootReducer = combineReducers<IRootSate>({
     selectedButton: selectedButtonReducer,
     todosKeys: todosKeysReducer,
-    todosEntities: todosEntitiesReducer
+    todosEntities: todosEntitiesReducer,
 })
 export default rootReducer
+

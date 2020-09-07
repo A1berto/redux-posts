@@ -1,5 +1,7 @@
-export interface IAction {
-    type: string,
+import {Action} from 'redux'
+
+
+export interface IAction extends Action<string>{
     payload?: any,
     meta?: any // info accessorie
 }

@@ -1,45 +1,26 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import './App.css';
 import {Post} from "./components/Post";
-import {IPost} from "./types";
-import Circle from "../../redux-posts/src/images/circle.png"
-import LeftImg from "../../redux-posts/src/images/lefImg.png"
 import {useDispatch, useSelector} from "react-redux";
 import {
     addCounterTodoAction,
     changeSelectedButtonAction,
-    setTodosListAction, sortTodoListByCounterAction, sortTodoListBySubmitterAction,
+    FETCH_DATA_SWITCH_TYPE,
+    sortTodoListByCounterAction,
+    sortTodoListBySubmitterAction,
     sortTodoListByTitleAction
 } from "./redux/actions";
-import {
-    postEntitiesValuesByKeysSelector,
-    postEntitiesValuesSelector,
-    postKeysSelector,
-    selectedButtonSelector,
-    selectedPostSelector
-} from "./redux/selectors"
+import {postEntitiesValuesByKeysSelector, selectedPostSelector} from "./redux/selectors"
 import Button from "./components/Button";
 
 
 //le immagini vengono viste come stringe (url), guardare come sono state passate alle props
-export const postsMock: Array<IPost> = [{
-    id: 1,
-    title: "B Haught or Naught",
-    subtitle: "High-minded or absent-minded?You decide",
-    submitterImg: Circle,
-    leftImg: LeftImg,
-    counter: 33,
-    submitterName: "Yoshi",
-},
-    {
-        id: 2,
-        title: "A SuperMajority",
-        subtitle: "Earn Point sadsa",
-        submitterImg: Circle,
-        leftImg: LeftImg,
-        counter: 37,
-        submitterName: "Naruto"
-    }]
+
+
+//TODO chiamate per prendere i posts. Faccio partire la chiamata con un bottone. Ogni volta che clicco mi chiama i dati.
+//Fare la prova con i tre map: switchMap, flatMap, exhaustMap.
+//fare tre epic: fetchDataExhaustEpic, fetchDataSwitchEpic
+//clicco handleclick, parte
 
 
 const App: React.FunctionComponent = () => {
@@ -53,7 +34,7 @@ const App: React.FunctionComponent = () => {
 
     //voglio che quando renderizzo la prima volta i dati ci siano già su redux
     useEffect(() => {
-        dispatch(setTodosListAction(postsMock))
+        //dispatch(setTodosListAction(postsMock))           Adesso aspetto la fetch e chiamo dopo i dati.
         dispatch(changeSelectedButtonAction(0)) //fare con i dati delle fetch
     }, [])
 
@@ -69,6 +50,12 @@ const App: React.FunctionComponent = () => {
     const sortBySubscriber = () => {
         dispatch(changeSelectedButtonAction(3))
         dispatch(sortTodoListBySubmitterAction(posts))
+    }
+    const handleClick = () => {
+        /*getToDoList().then(response => {
+            console.log("Response: ", response)
+            dispatch(setTodosListAction(response))})*/
+        dispatch({type: FETCH_DATA_SWITCH_TYPE})
     }
     return <>
         <Button
@@ -89,6 +76,8 @@ const App: React.FunctionComponent = () => {
             number={3}
             selected={selected}
         />
+        <button id="btn" onClick={() => handleClick()}>click</button>
+
         {
             //le parentesi graffe mi servono per scrivere codice tsx dentro jsx (per poter scrivere codice js)
 
